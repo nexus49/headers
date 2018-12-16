@@ -11,18 +11,13 @@ WORKDIR $DOCK_PKG_DIR
 
 ENV GOOS=linux
 
-RUN go get -u github.com/alecthomas/gometalinter && gometalinter --install
-
-# Run linting
-RUN gometalinter --vendor --deadline=2m --disable-all --enable=vet ./...
-
-# Run Tests
+RUN go get -u github.com/alecthomas/gometalinter && gometalinter --install && \
+    gometalinter --vendor --deadline=2m --disable-all --enable=vet ./...
 RUN go test --cover ./...
-
 RUN go build -o ./main ./cmd
 
 FROM alpine:3.8
 
-COPY --from=builder /go/src/github.com/nexus49/headers .
+COPY --from=builder /go/src/github.com/nexus49/headers/main .
 
 CMD ["./main"]
