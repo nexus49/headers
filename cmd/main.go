@@ -30,7 +30,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		pemStr, _ := pem.Decode([]byte(certStr))
 		cert, _ := x509.ParseCertificates(pemStr.Bytes)
 
-		w.Write([]byte("<b>Client Certificate</b>\n"))
+		w.Write([]byte("Client Certificate\n"))
 		w.Write([]byte(fmt.Sprintf("SignatureAlgorithm: %+v\n", cert[0].SignatureAlgorithm)))
 		w.Write([]byte(fmt.Sprintf("PublicKeyAlgorithm: %+v\n", cert[0].PublicKeyAlgorithm)))
 		subj := cert[0].Subject
