@@ -1,11 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ .Release.Name }}-cmas
+  name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
-    app: {{ .Release.Name }}-cmas
+    app: {{ .Release.Name }}
   ports:
     - name: http
       protocol: TCP
