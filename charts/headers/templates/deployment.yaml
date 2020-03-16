@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: headers
+  labels:
+    app: {{ .Release.Name }}-headers
+
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-headers
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-headers
+    spec:
+      serviceAccountName: {{ .Release.Name }}-headers-sa
+      containers:
+      - name: {{ .Release.Name }}-headers
+        image: nexus49/headers:latest
+        ports:
+          - name: http
+            containerPort: 8001
